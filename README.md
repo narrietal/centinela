@@ -1,5 +1,7 @@
 # project_centinela
 
+![plot](https://github.com/narrietal/project_centinela/main/example_fin_detection.jpg)
+
 ## Introduction
 Project Centinela is a collaboration among local environmental activists, researchers, and engineers aimed at **raising awareness of and protecting the Short-Finned Pilot Whales** in the Canary Islands, Spain. The islands are experiencing **unsustainable practices** due to massive tourism attractions, which not only impact the locals but also degrade the unique wildlife of the area. Water and noise pollution, along with deadly animal-ship encounters, are among the many direct causes of such mispractices. Among all the species, the Short-Finned Pilot Whales (Calderones Tropicales in Spanish) are of particular interest, as there is a group of **around 100 individuals that reside in the islands year-round**. This phenomenon has only been documented in **four other places in the world**. Little is known of these cetaceans and in 2008 it was officially listed on the IUCN Red List as Data Deficient.
 
