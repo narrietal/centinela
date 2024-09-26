@@ -1,4 +1,4 @@
-# Iniciativa Centinela
+# Project Centinela
 
 ![Fin detection](images/example_fin_detection.jpg)
 
@@ -7,15 +7,17 @@ Project Centinela is a collaboration among local environmental activists, resear
 
 This project aims to raise awareness of and protect such a unique species by creating an identification algorithm for the resident individuals with the aim of accomplishing two goals: gathering data for research about the species and providing tourists and locals with means to become more familiar with their cetacean neighbors.
 
-This repository contains the prototype of the Tropical Whale detection and classification algorithm based on the identification of their dorsal fin. The algorithm consists of two phases:
+This repository hosts a website with a demo of the recognition and identification algorithm based on the identification of their dorsal fin:
+
+[Centinela demo](https://narrietal.github.io/centinela/)
 
 1. A first model for detecting dorsal fins in images.
 2. A second model for individual identification.
 
-The models have been trained using a collection of images of Tropical Whales containing more than 1100 images and a total of 9 individuals.
+The models have been trained using a collection of images of Tropical Whales containing more than 1600 images and a total of 20 individuals.
 
 The dorsal fin detection model has an average precision (MAP50) of **98.9%**.
-The model for identifying the 9 species has an accuracy of **95.6%**.
+The model for identifying the 20 individuals has an accuracy of **95.6%**.
 
 ## Content
 

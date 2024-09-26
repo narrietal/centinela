@@ -53,7 +53,7 @@
 
         .attributionBackground {
             position: fixed;        /* Fix the link to a specific location on the page */
-            bottom: 2rem;           /* 1rem from the bottom */
+            bottom: 3rem;           /* 1rem from the bottom */
             right: 1rem;            /* 1rem from the right */
             font-size: 0.75rem;     /* Reduce the font size (12px equivalent) */
             color: rgba(47, 45, 48, 0.911);  /* Use Pico's primary color */
@@ -66,7 +66,7 @@
 
         .attributionFavicon {
             position: fixed;        /* Fix the link to a specific location on the page */
-            bottom: 1rem;           /* 1rem from the bottom */
+            bottom: 2rem;           /* 1rem from the bottom */
             right: 1rem;            /* 1rem from the right */
             font-size: 0.75rem;     /* Reduce the font size (12px equivalent) */
             color: rgba(47, 45, 48, 0.911);  /* Use Pico's primary color */
@@ -74,6 +74,19 @@
         }
 
         .attributionFavicon:hover {
+            text-decoration: underline; /* Add underline on hover for better UX */
+        }
+
+        .attributionAuthor {
+            position: fixed;        /* Fix the link to a specific location on the page */
+            bottom: 1rem;           /* 1rem from the bottom */
+            right: 1rem;            /* 1rem from the right */
+            font-size: 0.75rem;     /* Reduce the font size (12px equivalent) */
+            color: rgba(47, 45, 48, 0.911);  /* Use Pico's primary color */
+            text-decoration: none;  /* Remove the underline for a clean look */
+        }
+
+        .attributionAuthor:hover {
             text-decoration: underline; /* Add underline on hover for better UX */
         }
 
@@ -90,7 +103,7 @@
 <body>
     <main>
         <h1 class="main-title">CENTINELA</h1>
-        
+        <a href="https://github.com/narrietal" class="attributionAuthor">Author: Nicolas Arrieta Larraza (n.arrieta.larraza@gmail.com)</a>
         <a href="http://www.freepik.com" class="attributionBackground">Background designed by Freepik</a>
         <a href="https://www.flaticon.com/free-icons/shark" title="shark icons" class="attributionFavicon">Favicon designed by Shark by Smashicons - Flaticon</a>
 
