@@ -1,5 +1,6 @@
 const loadingBar = document.getElementById('loading-bar');
 const uploadSection = document.getElementById('upload-section');
+const loadingMessage = document.getElementById('loading-message');
 const loadingSection = document.getElementById('loading-section');
 const result = document.getElementById('result');
 const imageUpload = document.getElementById('image-upload');
@@ -32,14 +33,33 @@ const whaleMapping = {
     19: 'YANI'
 };
 
+const messages = ["Loading...", "Grab a coffe and relax...", "Almost there..."];
+let messageIndex = 0;
+
 // Function to load the models with a progress simulation that lasts at least 2 seconds
 async function loadModelsWithProgress() {
-    // Load the classification and object detection models asynchronously
-    identification_model = await tf.loadLayersModel('fin_identification_web_model/model.json');
-    console.log("Identification model loaded successfully!")
-    detection_model = await tf.loadGraphModel('fin_detection_web_model/model.json'); // Load object detection model
-    console.log("Detection model loaded successfully!")
+    // Start the message cycling every 5 seconds
+    const messageInterval = setInterval(() => {
+        messageIndex = (messageIndex + 1) % messages.length;
+        loadingMessage.textContent = messages[messageIndex];
+    }, 5000); // Change message every 5 seconds
 
+    try {
+        // Load the classification and object detection models asynchronously
+        identification_model = await tf.loadLayersModel('fin_identification_web_model/model.json');
+        console.log("Identification model loaded successfully!");
+
+        detection_model = await tf.loadGraphModel('fin_detection_web_model/model.json'); // Load object detection model
+        console.log("Detection model loaded successfully!");
+
+    } catch (error) {
+        console.error("Error loading models:", error);
+    }
+
+    // Once the models are loaded, stop changing the message
+    clearInterval(messageInterval);
+
+    // Hide the loading section and show the upload section
     loadingSection.classList.add('hidden');
     uploadSection.classList.remove('hidden');
 }
@@ -115,7 +135,7 @@ function cropBoundingBox(image, box) {
 document.getElementById('upload-form').addEventListener('submit', async (event) => {
     event.preventDefault();
     result.classList.remove('hidden');
-    result.textContent = 'Detecting objects and classifying...';
+    result.textContent = 'Detecting fins and classifying...';
     submitButton.setAttribute('aria-busy', 'true');
 
     const file = imageUpload.files[0];
@@ -219,10 +239,10 @@ document.getElementById('upload-form').addEventListener('submit', async (event) 
                     }
 
                     // Display the classification result
-                    result.innerHTML += `<kbd>RESULT: ${whaleName}</kbd><br>`;
+                    result.innerHTML += `RESULT: ${whaleName}`;
                 }
             } else {
-                result.textContent = 'Could not confidently find any fin in the image :(';
+                result.textContent = 'Could not confidently find any fin in the image';
             }
             submitButton.setAttribute('aria-busy', 'false');
         };

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centinela</title>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
     <style>
         /* Center content on the page */
 
@@ -50,7 +51,20 @@
             display: none;
         }
 
-        .attribution {
+        .attributionBackground {
+            position: fixed;        /* Fix the link to a specific location on the page */
+            bottom: 2rem;           /* 1rem from the bottom */
+            right: 1rem;            /* 1rem from the right */
+            font-size: 0.75rem;     /* Reduce the font size (12px equivalent) */
+            color: rgba(47, 45, 48, 0.911);  /* Use Pico's primary color */
+            text-decoration: none;  /* Remove the underline for a clean look */
+        }
+
+        .attributionBackground:hover {
+            text-decoration: underline; /* Add underline on hover for better UX */
+        }
+
+        .attributionFavicon {
             position: fixed;        /* Fix the link to a specific location on the page */
             bottom: 1rem;           /* 1rem from the bottom */
             right: 1rem;            /* 1rem from the right */
@@ -59,7 +73,7 @@
             text-decoration: none;  /* Remove the underline for a clean look */
         }
 
-        .attribution:hover {
+        .attributionFavicon:hover {
             text-decoration: underline; /* Add underline on hover for better UX */
         }
 
@@ -77,10 +91,11 @@
     <main>
         <h1 class="main-title">CENTINELA</h1>
         
-        <a href="http://www.freepik.com" class="attribution">Designed by Freepik</a>
+        <a href="http://www.freepik.com" class="attributionBackground">Background designed by Freepik</a>
+        <a href="https://www.flaticon.com/free-icons/shark" title="shark icons" class="attributionFavicon">Favicon designed by Shark by Smashicons - Flaticon</a>
 
         <div id="loading-section">
-            <h3>Loading Model...</h3>
+            <h3 id="loading-message">Loading...</h3>
             <!-- PicoCSS-styled progress bar -->
             <progress id="loading-bar"></progress>
         </div>
@@ -94,7 +109,7 @@
         </div>
 
         <!-- Prediction result section -->
-        <p id="result" class="hidden" style="color:rgba(47, 45, 48, 0.911);font-weight: bold;"></p>
+        <h4 id="result" class="hidden" style="color:rgba(47, 45, 48, 0.911);font-weight: bold;"></h4>
     </main>
 
     <!-- Load TensorFlow.js -->
