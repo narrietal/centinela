@@ -1,4 +1,4 @@
-# project_centinela
+# Iniciativa Centinela
 
 ![Fin detection](images/example_fin_detection.jpg)
 
