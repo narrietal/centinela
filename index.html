@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centinela</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <style>
+        /* Center content on the page */
+
+        /* Apply the background image to the entire body */
+        body {
+            background-image: url('images/background_image.jpg');
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-attachment: fixed; /* Keeps the background fixed during scroll */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .main-title {
+            color: var(--background);
+            font-size: 4rem; 
+        }
+
+        main {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Image preview fixed to 640x640 */
+        #image-preview {
+            width: 900px;
+            height: 320px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            background-color: #f3f3f3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .attribution {
+            position: fixed;        /* Fix the link to a specific location on the page */
+            bottom: 1rem;           /* 1rem from the bottom */
+            right: 1rem;            /* 1rem from the right */
+            font-size: 0.75rem;     /* Reduce the font size (12px equivalent) */
+            color: var(--primary);  /* Use Pico's primary color */
+            text-decoration: none;  /* Remove the underline for a clean look */
+        }
+
+        .attribution:hover {
+            text-decoration: underline; /* Add underline on hover for better UX */
+        }
+
+        img{border:2px solid rgba(47, 45, 48, 0.911);}
+
+        input[type='file'] {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1 class="main-title">CENTINELA</h1>
+        
+        <a href="http://www.freepik.com" class="attribution">Designed by Freepik</a>
+
+        <div id="loading-section">
+            <h3>Loading Model...</h3>
+            <!-- PicoCSS-styled progress bar -->
+            <progress id="loading-bar" max="100" value="0"></progress>
+        </div>
+        
+        <div id="upload-section" class="hidden">
+            <form id="upload-form">
+                <input type="file" id="image-upload" accept="image/*" required>
+                <img id="image-preview" class="hidden" alt="Image preview">
+                <button type="submit" id="submit-button" class="primary hidden">Classify Image</button>
+            </form>            
+        </div>
+
+        <!-- Prediction result section -->
+        <p id="result" class="hidden" style="color: var(--primary);font-weight: bold;"></p>
+    </main>
+
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Load external JS file -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
