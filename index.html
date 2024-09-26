@@ -15,18 +15,18 @@
             background-size: cover; /* Ensures the image covers the entire background */
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-attachment: fixed; /* Keeps the background fixed during scroll */
+            /*background-attachment: scroll; Allows the background to scroll with the content */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Ensure background covers the viewport even with little content */
             margin: 0;
             text-align: center;
             font-family: 'Arial', sans-serif;
         }
         
         .main-title {
-            color: var(--background);
+            color:rgba(47, 45, 48, 0.911);
             font-size: 4rem; 
         }
 
@@ -55,7 +55,7 @@
             bottom: 1rem;           /* 1rem from the bottom */
             right: 1rem;            /* 1rem from the right */
             font-size: 0.75rem;     /* Reduce the font size (12px equivalent) */
-            color: var(--primary);  /* Use Pico's primary color */
+            color: rgba(47, 45, 48, 0.911);  /* Use Pico's primary color */
             text-decoration: none;  /* Remove the underline for a clean look */
         }
 
@@ -66,7 +66,7 @@
         img{border:2px solid rgba(47, 45, 48, 0.911);}
 
         input[type='file'] {
-            color: var(--primary);
+            color:rgba(47, 45, 48, 0.911);
             font-weight: bold;
         }
 
@@ -82,7 +82,7 @@
         <div id="loading-section">
             <h3>Loading Model...</h3>
             <!-- PicoCSS-styled progress bar -->
-            <progress id="loading-bar" max="100" value="0"></progress>
+            <progress id="loading-bar"></progress>
         </div>
         
         <div id="upload-section" class="hidden">
@@ -94,7 +94,7 @@
         </div>
 
         <!-- Prediction result section -->
-        <p id="result" class="hidden" style="color: var(--primary);font-weight: bold;"></p>
+        <p id="result" class="hidden" style="color:rgba(47, 45, 48, 0.911);font-weight: bold;"></p>
     </main>
 
     <!-- Load TensorFlow.js -->

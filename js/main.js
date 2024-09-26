@@ -32,51 +32,16 @@ const whaleMapping = {
     19: 'YANI'
 };
 
-// Function to update progress bar value
-function updateLoadingBar(value) {
-    loadingBar.value = value;
-}
-
 // Function to load the models with a progress simulation that lasts at least 2 seconds
 async function loadModelsWithProgress() {
-    const startTime = performance.now(); // Start tracking the time
-    let progress = 0;
-
-    const progressInterval = setInterval(() => {
-        if (progress < 90) {
-            progress += 5; // Increase progress by 5% each time (reaching 90%)
-            updateLoadingBar(progress);
-        }
-    }, 100);
-
     // Load the classification and object detection models asynchronously
     identification_model = await tf.loadLayersModel('fin_identification_web_model/model.json');
     console.log("Identification model loaded successfully!")
     detection_model = await tf.loadGraphModel('fin_detection_web_model/model.json'); // Load object detection model
     console.log("Detection model loaded successfully!")
-    const endTime = performance.now();
-    const loadingTime = (endTime - startTime) / 1000;
 
-    clearInterval(progressInterval);
-
-    const remainingTime = 2 - loadingTime;
-    if (remainingTime > 0) {
-        const finalProgressInterval = setInterval(() => {
-            if (progress < 100) {
-                progress += (100 - progress) / (remainingTime * 10);
-                updateLoadingBar(progress);
-            } else {
-                clearInterval(finalProgressInterval);
-            }
-        }, 100);
-    } else {
-        updateLoadingBar(100);
-    }
-
-    setTimeout(() => {
-        loadingSection.classList.add('hidden');
-        uploadSection.classList.remove('hidden');
-    }, remainingTime > 0 ? remainingTime * 1000 : 0);
+    loadingSection.classList.add('hidden');
+    uploadSection.classList.remove('hidden');
 }
 
 // Load the models when the page loads
@@ -151,11 +116,12 @@ document.getElementById('upload-form').addEventListener('submit', async (event) 
     event.preventDefault();
     result.classList.remove('hidden');
     result.textContent = 'Detecting objects and classifying...';
-    //result.innerHTML = `<kbd>Result: ${whaleName}</kbd><br>`;
+    submitButton.setAttribute('aria-busy', 'true');
 
     const file = imageUpload.files[0];
     if (!file) {
         result.textContent = 'Please upload an image first.';
+        submitButton.setAttribute('aria-busy', 'false');
         return;
     }
 
@@ -247,13 +213,9 @@ document.getElementById('upload-form').addEventListener('submit', async (event) 
                     if ( topPred >= 0.95) {
                         whaleName = whaleMapping[predictedClass] + ' [ALMOST CERTAIN]';
                     }else if (topPred >= 0.90 && topPred < 0.95){
-                        const predictedClass = predictions.indexOf(Math.max(...predictions));
-                        confidenceMessage = '[LIKELY]';
-                        whaleName = whaleMapping[predictedClass];
+                        whaleName = whaleMapping[predictedClass] + ' [LIKELY]';
                     }else if (topPred >= 0.85 && topPred < 0.90){
-                        const predictedClass = predictions.indexOf(Math.max(...predictions));
-                        confidenceMessage = '[HIGHLY UNCERTAIN]';
-                        whaleName = whaleMapping[predictedClass];
+                        whaleName = whaleMapping[predictedClass] + ' [HIGHLY UNCERTAIN]';
                     }
 
                     // Display the classification result
@@ -262,6 +224,7 @@ document.getElementById('upload-form').addEventListener('submit', async (event) 
             } else {
                 result.textContent = 'Could not confidently find any fin in the image :(';
             }
+            submitButton.setAttribute('aria-busy', 'false');
         };
     };
     reader.readAsDataURL(file);
